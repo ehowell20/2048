@@ -5,8 +5,13 @@
 public class J2048Controller {
 	public static void main(String[] args) {
 		int DIM = 4;
-		int[] intArray = new int[DIM];
-		// print score
-		// view.printScore(model.getScore());
+		// create model
+		J2048Model model = new J2048Model(DIM);
+		// create view
+		J2048View view = new J2048View(DIM);
+		// initialize board
+		int[] board = new int[DIM];
+		// print board
+		view.draw(board);
 	}
 }

@@ -11,12 +11,12 @@ public class J2048Model {
 	private int DIM;
 	// Constructors
 	// creates model with parameter
-	public Model(int dimension)
+	public J2048Model(int dimension)
 	{
 		this.DIM = dimension;
 	}
 	// creates model with no parameter
-	public Model()
+	public J2048Model()
 	{
 		this(4);
 	}
@@ -28,6 +28,12 @@ public class J2048Model {
 	// 90% of the time, it should be a 2.
 	// 10% of the time, it should be a 4.
 	public void spawn(int[] board)
+	
+	// returns score
+	public double getScore()
+	{
+		return score;
+	}
 	
 	// return true if lost, player lost if
 	// no empty tiles on the board and
