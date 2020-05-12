@@ -27,14 +27,15 @@ public class J2048View {
 			// print - if empty spot (equals 0)
 			if (board[i] == 0)
 			{
-				String.format("%4c", '-');
+				System.out.printf("%4c", '-');
 			}
 			// print number
 			else
 			{
-				String.format("%4d", board[i]);
+				System.out.printf("%4d", board[i]);
 			}
 		}
+		System.out.println();
 	}
 	// prints score
 	public void printScore(double score)

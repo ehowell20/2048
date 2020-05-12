@@ -23,11 +23,26 @@ public class J2048Model {
 	// Methods
 	// Fill board with two 2s in random locations.
 	public void init(int[] board)
+	{
+		// pick random number from 1 to DIM
+		int random = (int)(Math.random() * DIM);
+		// put the number 2 in that index
+		board[random] = 2;
+		// pick random number from 1 to DIM until it's different than the first random number
+		int random2;
+		do
+		{
+			random2 = (int)(Math.random() * DIM);
+		}
+		while (random2 == random);
+		// put the number 2 in that index
+		board[random2] = 2;
+	}
 
 	// Spawn a new value in an empty location in the board.
 	// 90% of the time, it should be a 2.
 	// 10% of the time, it should be a 4.
-	public void spawn(int[] board)
+	//public void spawn(int[] board);
 	
 	// returns score
 	public double getScore()
@@ -38,8 +53,8 @@ public class J2048Model {
 	// return true if lost, player lost if
 	// no empty tiles on the board and
 	// no 2 same tiles are vertically or horizontally next to each other
-	public boolean playerLost(int[] board)
+	//public boolean playerLost(int[] board);
 	
 	// shifts the board (w up, a left, s down, d right)
-	public void shift(char direction)
+	//public void shift(char direction);
 }
