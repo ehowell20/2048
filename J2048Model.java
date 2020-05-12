@@ -64,39 +64,85 @@ public class J2048Model {
 		{
 			random2 = (int)(Math.random() * DIM);
 		}
-		while (random2 != 0);
+		while (board[random2] != 0);
 		// spawn value in a random empty space
 		board[random2] = value;
 	}
-	
+
 	// returns score
 	public double getScore()
 	{
 		return score;
 	}
-	
+
 	// return true if lost, player lost if
 	// no empty tiles on the board and
 	// no 2 same tiles are vertically or horizontally next to each other
 	//public boolean playerLost(int[] board);
-	
+
 	// shifts the board right
-	public void shiftRight(int[] board, char direction)
+	public void shiftRight(int[] board)
 	{
+		boolean skip = false;
 		for (int i = 0; i < DIM - 1; i++)
 		{
 			// combine numbers
 			if (board[i+1] == board[i])
 			{
+				if (skip)
+				{
+					skip = !skip;
+					break;
+				}
 				// double right value and change left value to 0
 				board[i+1] *= 2;
 				board[i] = 0;
+				// dont merge with next number
+				skip = !skip;
 			}
 			// move numbers
-			else if (board[i+1] == 0 && board[i] > board[i+1])
+			else if (board[i+1] == 0 && board[i] != 0)
 			{
+				// switch values if right one is 0 and left one is not
 				board[i+1] = board[i];
 				board[i] = 0;
+			}
+		}
+	}
+	// shift right
+	// shift left
+	public void shiftLeft(int[] board)
+	{
+		boolean skip = false;
+		for (int i = 0; i < DIM; i++)
+		{
+			// look for non 0 numbers and not in first position
+			if (board[i] != 0 && i != 0)
+			{
+				skip = false;
+				// scan backwards for a non 0
+				for (int j = i-1; j > -1; j--)
+				{
+					if (board[j] != 0 && board[i] != 0)
+					{
+						// if not same number, put value behind position
+						if (board[j] != board[i])
+						{	
+							// if not next to each other, switch values
+							if (j+1 != i)
+							{
+								board[j+1] = board[i];
+								board[i] = 0;
+							}
+						}
+						// if same number, merge
+						else if (board[j] == board[i])
+						{
+							board[j] += board[i];
+							board[i] = 0;
+						}
+					}
+				}
 			}
 		}
 	}
