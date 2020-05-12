@@ -80,6 +80,24 @@ public class J2048Model {
 	// no 2 same tiles are vertically or horizontally next to each other
 	//public boolean playerLost(int[] board);
 	
-	// shifts the board (w up, a left, s down, d right)
-	//public void shift(char direction);
+	// shifts the board right
+	public void shiftRight(int[] board, char direction)
+	{
+		for (int i = 0; i < DIM - 1; i++)
+		{
+			// combine numbers
+			if (board[i+1] == board[i])
+			{
+				// double right value and change left value to 0
+				board[i+1] *= 2;
+				board[i] = 0;
+			}
+			// move numbers
+			else if (board[i+1] == 0 && board[i] > board[i+1])
+			{
+				board[i+1] = board[i];
+				board[i] = 0;
+			}
+		}
+	}
 }
