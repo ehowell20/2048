@@ -42,7 +42,32 @@ public class J2048Model {
 	// Spawn a new value in an empty location in the board.
 	// 90% of the time, it should be a 2.
 	// 10% of the time, it should be a 4.
-	//public void spawn(int[] board);
+	public void spawn(int[] board)
+	{
+		// value of number being placed (2 or 4)
+		int value;
+		// random number from 1 to 10
+		int random = (int)(Math.random() * 10) + 1;
+		// if the number is 10, spawn a 4
+		if (random == 10)
+		{
+			value = 4;
+		}
+		// if the number is anything from 1 to 9, spawn a 2
+		else
+		{
+			value = 2;
+		}
+		int random2;
+		// generate a random index number until the index refers to an empty spot
+		do
+		{
+			random2 = (int)(Math.random() * DIM);
+		}
+		while (random2 != 0);
+		// spawn value in a random empty space
+		board[random2] = value;
+	}
 	
 	// returns score
 	public double getScore()
