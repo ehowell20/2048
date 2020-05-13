@@ -80,36 +80,38 @@ public class J2048Model {
 	// no 2 same tiles are vertically or horizontally next to each other
 	//public boolean playerLost(int[] board);
 
-	// shifts the board right
+	// shift right
 	public void shiftRight(int[] board)
 	{
-		boolean skip = false;
-		for (int i = 0; i < DIM - 1; i++)
+		for (int i = DIM-1; i > -1; i--)
 		{
-			// combine numbers
-			if (board[i+1] == board[i])
+			// changeable i value
+			int k = i;
+			// look for non 0 numbers and not in last position
+			if (board[i] != 0 && i != 3)
 			{
-				if (skip)
+				// scan right for a non 0
+				for (int j = i+1; j < DIM; j++)
 				{
-					skip = !skip;
-					break;
+					// if 0, switch numbers
+					if (board[j] == 0)
+					{
+						board[j] = board[k];
+						board[k] = 0;
+					}
+					// if same number, merge
+					else if (board[j] == board[k])
+					{
+						board[j] += board[k];
+						board[k] = 0;
+					}
+					// increase k by 1 to keep the values being compared next to each other
+					// use int k instead of int i in order not to mess up the loop
+					k++;
 				}
-				// double right value and change left value to 0
-				board[i+1] *= 2;
-				board[i] = 0;
-				// dont merge with next number
-				skip = !skip;
-			}
-			// move numbers
-			else if (board[i+1] == 0 && board[i] != 0)
-			{
-				// switch values if right one is 0 and left one is not
-				board[i+1] = board[i];
-				board[i] = 0;
 			}
 		}
 	}
-	// shift right
 	// shift left
 	public void shiftLeft(int[] board)
 	{
@@ -117,11 +119,10 @@ public class J2048Model {
 		{
 			// changeable i value
 			int k = i;
-			boolean skip = false;
 			// look for non 0 numbers and not in first position
 			if (board[i] != 0 && i != 0)
 			{
-				// scan backwards for a non 0
+				// scan left for a non 0
 				for (int j = i-1; j > -1; j--)
 				{
 					// if 0, switch numbers
@@ -133,16 +134,8 @@ public class J2048Model {
 					// if same number, merge
 					else if (board[j] == board[k])
 					{
-						// if skipping this merge, reset skip to false to allow next merge
-						if (skip)
-						{
-							skip = !skip;
-							// don't merge this time
-							break;
-						}
 						board[j] += board[k];
 						board[k] = 0;
-						skip = true;
 					}
 					// decrease k by 1 to keep the values being compared next to each other
 					// use int k instead of int i in order not to mess up the loop
