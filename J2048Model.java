@@ -113,35 +113,40 @@ public class J2048Model {
 	// shift left
 	public void shiftLeft(int[] board)
 	{
-		boolean skip = false;
 		for (int i = 0; i < DIM; i++)
 		{
+			// changeable i value
+			int k = i;
+			boolean skip = false;
 			// look for non 0 numbers and not in first position
 			if (board[i] != 0 && i != 0)
 			{
-				skip = false;
 				// scan backwards for a non 0
 				for (int j = i-1; j > -1; j--)
 				{
-					if (board[j] != 0 && board[i] != 0)
+					// if 0, switch numbers
+					if (board[j] == 0)
 					{
-						// if not same number, put value behind position
-						if (board[j] != board[i])
-						{	
-							// if not next to each other, switch values
-							if (j+1 != i)
-							{
-								board[j+1] = board[i];
-								board[i] = 0;
-							}
-						}
-						// if same number, merge
-						else if (board[j] == board[i])
-						{
-							board[j] += board[i];
-							board[i] = 0;
-						}
+						board[j] = board[k];
+						board[k] = 0;
 					}
+					// if same number, merge
+					else if (board[j] == board[k])
+					{
+						// if skipping this merge, reset skip to false to allow next merge
+						if (skip)
+						{
+							skip = !skip;
+							// don't merge this time
+							break;
+						}
+						board[j] += board[k];
+						board[k] = 0;
+						skip = true;
+					}
+					// decrease k by 1 to keep the values being compared next to each other
+					// use int k instead of int i in order not to mess up the loop
+					k--;
 				}
 			}
 		}

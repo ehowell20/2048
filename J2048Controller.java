@@ -22,11 +22,16 @@ public class J2048Controller {
 		{
 			// print board
 			view.draw(board);
+			// scan for move
 			char direction = kb.next().charAt(0);
 			do
 			{
 				switch (direction)
 				{
+					case 'q':
+						// quit the game
+						System.out.println("Game Over!");
+            			System.exit(0);
 					case 'a':
 						// shift board left
 						model.shiftLeft(board);
@@ -41,7 +46,9 @@ public class J2048Controller {
 				}
 			}
 			while(!valid);
+			// spawn new random tile (2 or 4)
 			model.spawn(board);
+			// check if game is lost
 		}
 		while (!lost);
 	}
