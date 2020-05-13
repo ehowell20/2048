@@ -5,6 +5,8 @@
 // The Model also moves the pieces on the board and
 // determines if the game has been won.
 
+import java.util.*;
+
 public class J2048Model {
 	// Instance variables
 	private int score;
@@ -78,7 +80,24 @@ public class J2048Model {
 	// return true if lost, player lost if
 	// no empty tiles on the board and
 	// no 2 same tiles are vertically or horizontally next to each other
-	//public boolean playerLost(int[] board);
+	public boolean playerLost(int[] board)
+	{
+		// check left to right for same tiles
+		for (int i = 0; i < DIM-1; i++)
+		{
+			// return false if 0 tile is found
+			if (board[i] == 0 || board[i+1] == 0)
+			{
+				return false;
+			}
+			// return false if same 2 tiles (horizontally)
+			if (board[i] == board[i+1])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 
 	// shift right
 	public void shiftRight(int[] board)

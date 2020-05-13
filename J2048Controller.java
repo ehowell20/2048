@@ -18,10 +18,10 @@ public class J2048Controller {
 		int[] board = new int[DIM];
 		// set up board to play
 		model.init(board);
+		// print board
+		view.draw(board);
 		do
 		{
-			// print board
-			view.draw(board);
 			// scan for move
 			char direction = kb.next().charAt(0);
 			do
@@ -48,8 +48,12 @@ public class J2048Controller {
 			while(!valid);
 			// spawn new random tile (2 or 4)
 			model.spawn(board);
+			// print board
+			view.draw(board);
 			// check if game is lost
+			lost = model.playerLost(board);
 		}
 		while (!lost);
+		System.out.println("Game Over!");
 	}
 }
