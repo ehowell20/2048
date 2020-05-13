@@ -91,6 +91,8 @@ public class J2048Model {
 			if (board[i] != 0 && i != 3)
 			{
 				// scan right for a non 0
+				// stop scanning if merge since merges only happen on the far right
+				// which means there should be no more zeros
 				for (int j = i+1; j < DIM; j++)
 				{
 					// if 0, switch numbers
@@ -104,6 +106,12 @@ public class J2048Model {
 					{
 						board[j] += board[k];
 						board[k] = 0;
+						break;
+					}
+					// if didn't switch or merge, stop comparing
+					else
+					{
+						break;
 					}
 					// increase k by 1 to keep the values being compared next to each other
 					// use int k instead of int i in order not to mess up the loop
@@ -123,6 +131,8 @@ public class J2048Model {
 			if (board[i] != 0 && i != 0)
 			{
 				// scan left for a non 0
+				// stop scanning if merge since merges only happen on the far right
+				// which means there should be no more zeros
 				for (int j = i-1; j > -1; j--)
 				{
 					// if 0, switch numbers
@@ -136,6 +146,12 @@ public class J2048Model {
 					{
 						board[j] += board[k];
 						board[k] = 0;
+						break;
+					}
+					// if didn't switch or merge, stop comparing
+					else
+					{
+						break;
 					}
 					// decrease k by 1 to keep the values being compared next to each other
 					// use int k instead of int i in order not to mess up the loop
