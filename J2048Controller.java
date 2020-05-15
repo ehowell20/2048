@@ -81,6 +81,7 @@ public class J2048Controller {
 			view.printScore(model.getScore());
 			// check if game is lost
 			lost = model.playerLost(board);
+			System.out.println(lost);
 		}
 		while (!lost);
 		view.printLose(model.getScore());

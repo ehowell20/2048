@@ -47,12 +47,12 @@ public class J2048View {
 		System.out.println("Command not recognized. Please try again.");
 	}
 	// prints score
-	public void printScore(double score)
+	public void printScore(int score)
 	{
 		System.out.println("Current Score: " + score);
 	}
 	// print losing screen
-	public void printLose(double score)
+	public void printLose(int score)
 	{
 		System.out.println("Game Over!");
 		System.out.println("Final Score: " + score);

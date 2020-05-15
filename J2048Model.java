@@ -78,7 +78,7 @@ public class J2048Model {
 	}
 
 	// returns score
-	public double getScore()
+	public int getScore()
 	{
 		return score;
 	}
