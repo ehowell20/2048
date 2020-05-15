@@ -40,6 +40,7 @@ public class J2048Controller {
 						for (int i = 0; i < DIM; i++)
 						{
 							model.shiftLeft(model.tempArray(board, temp, i, 'r'));
+							model.updateBoard(board, temp, i, 'r');
 						}
 						break;
 					// shift board right
@@ -48,6 +49,7 @@ public class J2048Controller {
 						for (int i = 0; i < DIM; i++)
 						{
 							model.shiftRight(model.tempArray(board, temp, i, 'r'));
+							model.updateBoard(board, temp, i, 'r');
 						}
 						break;
 					default:
