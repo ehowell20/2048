@@ -15,7 +15,9 @@ public class J2048Controller {
 		// create view
 		J2048View view = new J2048View(DIM);
 		// initialize board
-		int[] board = new int[DIM];
+		int[][] board = new int[DIM][DIM];
+		// temp array for rows or columns being altered
+		int[] temp = new int[DIM];
 		// set up board to play
 		model.init(board);
 		// print board
@@ -34,11 +36,11 @@ public class J2048Controller {
             			System.exit(0);
 					case 'a':
 						// shift board left
-						model.shiftLeft(board);
+						model.shiftLeft(temp);
 						break;
 					case 'd':
 						// shift board right
-						model.shiftRight(board);
+						model.shiftRight(temp);
 						break;
 					default:
 						System.out.println("Command not recognized. Please try again.");

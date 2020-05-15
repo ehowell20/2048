@@ -20,19 +20,22 @@ public class J2048View {
 	}
 	// Methods
 	// Draws the board.
-	public void draw(int[] board)
+	public void draw(int[][] board)
 	{
-		for (int i = 0; i < board.length; i++)
+		for (int i = 0; i < DIM; i++)
 		{
-			// print - if empty spot (equals 0)
-			if (board[i] == 0)
+			for (int j = 0; j < DIM; j++)
 			{
-				System.out.printf("%4c", '-');
-			}
-			// print number
-			else
-			{
-				System.out.printf("%4d", board[i]);
+				// print - if empty spot (equals 0)
+				if (board[i][j] == 0)
+				{
+					System.out.printf("%4c", '-');
+				}
+				// print number
+				else
+				{
+					System.out.printf("%4d", board[i]);
+				}
 			}
 		}
 		System.out.println();
