@@ -198,7 +198,28 @@ public class J2048Model {
 	// public void shiftVertical(int[] temp, char updown)
 
 	// copies column or row into temp array
-	// public int[] tempArray(int[][] board, int rowcol, char rowcol)
+	public int[] tempArray(int[][] board, int[] temp, int rowcol, char rc)
+	{
+		// if column preferenced
+		if (rc == 'c')
+		{
+			// copy column values into temp array
+			for (int i = 0; i < DIM; i++)
+			{
+				temp[i] = board[i][rowcol];
+			}
+		}
+		// if row preferenced
+		else if (rc == 'r')
+		{
+			// copy row values into temp array
+			for (int i = 0; i < DIM; i++)
+			{
+				Arrays.fill(temp, board[rowcol][i]);
+			}
+		}
+		return temp;
+	}
 
 	// applies changes to the board made in the temp array
 	// public void updateBoard(int[][] board, int rowcol, char rowcol)

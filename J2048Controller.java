@@ -30,17 +30,25 @@ public class J2048Controller {
 			{
 				switch (direction)
 				{
+					// quit the game
 					case 'q':
-						// quit the game
 						System.out.println("Game Over!");
             			System.exit(0);
+            		// shift board left
 					case 'a':
-						// shift board left
-						model.shiftLeft(temp);
+						// shift each row on board left
+						for (int i = 0; i < DIM; i++)
+						{
+							model.shiftLeft(model.tempArray(board, temp, i, 'r'));
+						}
 						break;
+					// shift board right
 					case 'd':
-						// shift board right
-						model.shiftRight(temp);
+						// shift each row on board right
+						for (int i = 0; i < DIM; i++)
+						{
+							model.shiftRight(model.tempArray(board, temp, i, 'r'));
+						}
 						break;
 					default:
 						System.out.println("Command not recognized. Please try again.");

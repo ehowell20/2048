@@ -34,9 +34,10 @@ public class J2048View {
 				// print number
 				else
 				{
-					System.out.printf("%4d", board[i]);
+					System.out.printf("%4d", board[i][j]);
 				}
 			}
+			System.out.println();
 		}
 		System.out.println();
 	}
