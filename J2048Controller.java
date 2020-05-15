@@ -20,52 +20,69 @@ public class J2048Controller {
 		int[] temp = new int[DIM];
 		// set up board to play
 		model.init(board);
+		// printscore
+		view.printScore(model.getScore());
 		// print board
 		view.draw(board);
 		do
 		{
 			// scan for move
 			char direction = kb.next().charAt(0);
-			do
+			switch (direction)
 			{
-				switch (direction)
-				{
-					// quit the game
-					case 'q':
-						System.out.println("Game Over!");
-            			System.exit(0);
-            		// shift board left
-					case 'a':
-						// shift each row on board left
-						for (int i = 0; i < DIM; i++)
-						{
-							model.shiftLeft(model.tempArray(board, temp, i, 'r'));
-							model.updateBoard(board, temp, i, 'r');
-						}
-						break;
-					// shift board right
-					case 'd':
-						// shift each row on board right
-						for (int i = 0; i < DIM; i++)
-						{
-							model.shiftRight(model.tempArray(board, temp, i, 'r'));
-							model.updateBoard(board, temp, i, 'r');
-						}
-						break;
-					default:
-						System.out.println("Command not recognized. Please try again.");
-						valid = false;
+				// quit the game
+				case 'q':
+					System.out.println("Game Over!");
+        			System.exit(0);
+        		// shift board left
+				case 'a':
+					// shift each row on board left
+					for (int i = 0; i < DIM; i++)
+					{
+						model.shiftLeft(model.tempArray(board, temp, i, 'r'));
+						model.updateBoard(board, temp, i, 'r');
+					}
+					break;
+				// shift board right
+				case 'd':
+					// shift each row on board right
+					for (int i = 0; i < DIM; i++)
+					{
+						model.shiftRight(model.tempArray(board, temp, i, 'r'));
+						model.updateBoard(board, temp, i, 'r');
+					}
+					break;
+				// shift board up
+				case 'w':
+					// shift each column on board up
+					for (int i = 0; i < DIM; i++)
+					{
+						model.shiftLeft(model.tempArray(board, temp, i, 'c'));
+						model.updateBoard(board, temp, i, 'c');
+					}
+					break;
+				// shift board down
+				case 's':
+					// shift each column on board down 
+					for (int i = 0; i < DIM; i++)
+					{
+						model.shiftRight(model.tempArray(board, temp, i, 'c'));
+						model.updateBoard(board, temp, i, 'c');
+					}
+					break;
+				default:
+					view.printRetype();
 				}
-			}
-			while(!valid);
 			// spawn new random tile (2 or 4)
 			model.spawn(board);
 			// print board
 			view.draw(board);
+			// printscore
+			view.printScore(model.getScore());
 			// check if game is lost
 			lost = model.playerLost(board);
 		}
 		while (!lost);
-		System.out.println("Game Over!");
+		view.printLose(model.getScore());
 	}
 }

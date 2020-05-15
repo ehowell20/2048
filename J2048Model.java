@@ -91,7 +91,7 @@ public class J2048Model {
 		// check left to right for same tiles
 		for (int i = 0; i < DIM-1; i++)
 		{
-			for (int j = 0; i < DIM-1; j++)
+			for (int j = 0; j < DIM-1; j++)
 			{
 				// return false if 0 tile is found
 				if (board[i][j] == 0 || board[i][j+1] == 0)
@@ -139,6 +139,8 @@ public class J2048Model {
 					{
 						temp[j] += temp[k];
 						temp[k] = 0;
+						// increase score by merged number
+						score += temp[j];
 						break;
 					}
 					// if didn't switch or merge, stop comparing
@@ -156,6 +158,8 @@ public class J2048Model {
 	// shift left
 	public void shiftLeft(int[] temp)
 	{
+		// stops loop from scanning index after it merges
+		int stopper = -1;
 		for (int i = 0; i < DIM; i++)
 		{
 			// changeable i value
@@ -166,7 +170,7 @@ public class J2048Model {
 				// scan left for a non 0
 				// stop scanning if merge since merges only happen on the far right
 				// which means there should be no more zeros
-				for (int j = i-1; j > -1; j--)
+				for (int j = i-1; j > stopper; j--)
 				{
 					// if 0, switch numbers
 					if (temp[j] == 0)
@@ -179,7 +183,10 @@ public class J2048Model {
 					{
 						temp[j] += temp[k];
 						temp[k] = 0;
-						break;
+						// increase to set left boundry one higher as to not merge with anything beyond it
+						stopper = j;
+						// increase score by merged number
+						score += temp[j];
 					}
 					// if didn't switch or merge, stop comparing
 					else
@@ -194,9 +201,6 @@ public class J2048Model {
 		}
 	}
 
-	// shifts board up or down
-	// public void shiftVertical(int[] temp, char updown)
-
 	// copies column or row into temp array
 	public int[] tempArray(int[][] board, int[] temp, int rowcol, char rc)
 	{
@@ -210,7 +214,7 @@ public class J2048Model {
 			}
 		}
 		// if row preferenced
-		else if (rc == 'r')
+		else
 		{
 			// copy row values into temp array
 			for (int i = 0; i < DIM; i++)
@@ -234,7 +238,7 @@ public class J2048Model {
 			}
 		}
 		// if row preferenced
-		else if (rc == 'r')
+		else
 		{
 			// copy row values into temp array
 			for (int i = 0; i < DIM; i++)

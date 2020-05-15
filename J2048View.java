@@ -41,9 +41,20 @@ public class J2048View {
 		}
 		System.out.println();
 	}
+	// asks user to type in a key again
+	public void printRetype()
+	{
+		System.out.println("Command not recognized. Please try again.");
+	}
 	// prints score
 	public void printScore(double score)
 	{
 		System.out.println("Current Score: " + score);
+	}
+	// print losing screen
+	public void printLose(double score)
+	{
+		System.out.println("Game Over!");
+		System.out.println("Final Score: " + score);
 	}
 }
