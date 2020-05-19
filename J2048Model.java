@@ -67,14 +67,29 @@ public class J2048Model {
 		int randomCol;
 		int randomRow;
 		// generate a random col and row number until the col and row refer to an empty spot
-		do
+		// check for empty spaces
+		searchZero:
+		
+		for (int i = 0; i < DIM; i++)
 		{
-			randomRow = (int)(Math.random() * DIM);
-			randomCol = (int)(Math.random() * DIM);
+			for (int j = 0; j < DIM; j++)
+			{
+				// if empty space, allow number to spawn
+				if (board[i][j] == 0)
+				{
+					do
+					{
+						randomRow = (int)(Math.random() * DIM);
+						randomCol = (int)(Math.random() * DIM);
+					}
+					// do while random spot not empty and 
+					while (board[randomRow][randomCol] != 0);
+					// spawn value in a random empty space
+					board[randomRow][randomCol] = value;
+					break searchZero;
+				}
+			}
 		}
-		while (board[randomRow][randomCol] != 0);
-		// spawn value in a random empty space
-		board[randomRow][randomCol] = value;
 	}
 
 	// returns score
@@ -88,23 +103,23 @@ public class J2048Model {
 	// no 2 same tiles are vertically or horizontally next to each other
 	public boolean playerLost(int[][] board)
 	{
-		// check left to right for same tiles
-		for (int i = 0; i < DIM-1; i++)
+		// check left to right and up to down
+		for (int i = 0; i < DIM; i++)
 		{
 			for (int j = 0; j < DIM-1; j++)
 			{
-				// return false if 0 tile is found
+				// return false if 0 (empty) tile is found
 				if (board[i][j] == 0 || board[i][j+1] == 0)
 				{
 					return false;
 				}
 				// return false if same 2 tiles (horizontally)
-				if (board[i][j] == board[i][j+1])
+				else if (board[i][j] == board[i][j+1])
 				{
 					return false;
 				}
 				// return false if same 2 tiles (vertically)
-				if (board[j][i] == board[j+1][i])
+				else if (board[j][i] == board[j+1][i])
 				{
 					return false;
 				}

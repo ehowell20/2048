@@ -75,15 +75,14 @@ public class J2048Controller {
 				}
 			// spawn new random tile (2 or 4)
 			model.spawn(board);
-			// print board
-			view.draw(board);
 			// printscore
 			view.printScore(model.getScore());
+			// print board
+			view.draw(board);
 			// check if game is lost
 			lost = model.playerLost(board);
-			System.out.println(lost);
 		}
-		while (!lost);
+		while(!lost);
 		view.printLose(model.getScore());
 	}
 }
