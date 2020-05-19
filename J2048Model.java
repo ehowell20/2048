@@ -131,6 +131,8 @@ public class J2048Model {
 	// shift right
 	public void shiftRight(int[] temp)
 	{
+		// stops loop from scanning index after it merges
+		int stopper = DIM;
 		for (int i = DIM-1; i > -1; i--)
 		{
 			// changeable i value
@@ -141,7 +143,7 @@ public class J2048Model {
 				// scan right for a non 0
 				// stop scanning if merge since merges only happen on the far right
 				// which means there should be no more zeros
-				for (int j = i+1; j < DIM; j++)
+				for (int j = i+1; j < stopper; j++)
 				{
 					// if 0, switch numbers
 					if (temp[j] == 0)
@@ -156,9 +158,10 @@ public class J2048Model {
 						temp[k] = 0;
 						// increase score by merged number
 						score += temp[j];
-						break;
+						// increase to set right boundry one lower as to not merge with anything beyond it
+						stopper = j;
 					}
-					// if didn't switch or merge, stop comparing
+					// if didn't switch or merge, skip to comparing next 2 numbers
 					else
 					{
 						break;
